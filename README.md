@@ -10,7 +10,12 @@ Spring Boot application to manage smart home devices, based on RaspberryPi.
 _in development_
 
 ### Build
-_in development_
+Before building need setup env:
+* PI4J_PLATFORM=simulated;
+```
+export PI4J_PLATFORM=simulated
+mvn clean install
+```
 
 ### Deploy
 _in development_
