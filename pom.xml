@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.geracimov.otus.lighthouse</groupId>
-    <artifactId>lighthouseapp</artifactId>
+    <groupId>ru.geracimov.otus.spring.lighthouse</groupId>
+    <artifactId>lh-main</artifactId>
     <version>1.0.0</version>
-    <name>lighthouseapp</name>
+    <name>lh-main</name>
     <packaging>pom</packaging>
 
     <parent>
@@ -15,10 +15,6 @@
         <version>2.2.0.RELEASE</version>
         <relativePath/>
     </parent>
-
-    <modules>
-        <module>configserver</module>
-    </modules>
 
     <properties>
         <java.version>12</java.version>
