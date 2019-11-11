@@ -3,4 +3,4 @@ jdk: oraclejdk12
 env:
   - PI4J_PLATFORM=simulated
 script:
-  - ./mvn clean install -B
+  - ./mvnw clean install -B
