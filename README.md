@@ -12,8 +12,9 @@ _in development_
 
 ## Build
 Before building need setup env:
-*  PI4J_PLATFORM=simulated;
-```
+*   PI4J_PLATFORM=simulated;
+
+```shell script
 export PI4J_PLATFORM=simulated
 mvn clean install
 ```
