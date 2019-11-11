@@ -6,7 +6,7 @@
     <parent>
         <groupId>ru.geracimov.otus.spring.lighthouse</groupId>
         <artifactId>lh-main</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
 
     <artifactId>lh-configserver</artifactId>
