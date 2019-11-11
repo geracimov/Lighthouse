@@ -1,0 +1,8 @@
+language: java
+jdk: oraclejdk12
+env:
+  - PI4J_PLATFORM=simulated
+before_install:
+  - chmod +x mvnw
+script:
+  - ./mvnw clean install -B
