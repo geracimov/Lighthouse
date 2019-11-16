@@ -1,0 +1,9 @@
+sudo: false
+language: java
+jdk: oraclejdk12
+before_install:
+  - chmod +x ./mvnw
+script:
+  - ./mvnw clean install -B
+#after_success:
+#  - bash <(curl -s https://codecov.io/bash)
