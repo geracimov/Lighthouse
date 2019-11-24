@@ -15,7 +15,7 @@
     <description>Lighthouse configuration server</description>
 
     <properties>
-        <h2.version>1.4.199</h2.version>
+        <postgres.version>42.2.8.jre7</postgres.version>
     </properties>
 
     <dependencies>
@@ -28,9 +28,9 @@
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgres.version}</version>
         </dependency>
     </dependencies>
 
