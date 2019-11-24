@@ -102,6 +102,7 @@ public class PinServiceImpl implements PinService {
     @PreDestroy
     private void destroy() {
         log.info("Controller shutdown...");
+        gpioController.unexportAll();
         gpioController.shutdown();
     }
 

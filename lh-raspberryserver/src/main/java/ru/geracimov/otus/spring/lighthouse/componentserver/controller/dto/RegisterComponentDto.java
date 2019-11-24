@@ -10,6 +10,6 @@ public class RegisterComponentDto {
     private final Integer address;
     private final String name;
     private final PinMode pinMode;
-    private final String componentName;
+    private final String componentType;
 
 }
