@@ -20,6 +20,7 @@
         <module>lh-configserver</module>
         <module>lh-raspberryserver</module>
         <module>lh-discoveryserver</module>
+        <module>lh-managementserver</module>
     </modules>
 
     <properties>
