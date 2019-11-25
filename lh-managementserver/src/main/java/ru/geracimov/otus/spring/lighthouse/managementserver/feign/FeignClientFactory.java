@@ -39,6 +39,7 @@ public class FeignClientFactory {
         return Feign.builder()
                     .encoder(encoder)
                     .decoder(decoder)
+                    .errorDecoder(new FeignErrorDecoder())
                     .target(target);
     }
 
