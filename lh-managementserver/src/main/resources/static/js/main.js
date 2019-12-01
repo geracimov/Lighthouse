@@ -1,27 +1,35 @@
-var messageApi = Vue.resource('/rpi{/id}');
+var options = {
+    url: 'http://localhost:10000/api',
+    method: 'GET',
+    headers:
+        {
+            'Authorization': 'Basic aG9tZTpob21lUGFzcw=='
+        }
+};
 
-
-Vue.component('message-row', {
-    props: ['message'],
-    template: '<div><i>({{message.instanceId}})</i>{{message.homePageUrl}}</div>'
+Vue.component('component-row', {
+    props: ['componentData'],
+    template: '<div><i>{{componentData.name}}</i> > <span>{{componentData.instanceCount}}</span></div>'
 });
 
-Vue.component('messages-list', {
-    props: ['messages'],
-    template:
-        '<div>' +
-        '<message-row v-for="message in messages" :key="message.id" :message="message"/>' +
+Vue.component('component-list', {
+    props: ['components'],
+    template: '<div>' +
+        '<h4>Components</h4>' +
+        '<component-row v-for="component in components" :key="component.name" :componentData="component"/>' +
         '</div>',
     created: function () {
-        messageApi.get().then(result => result.json().then(data => data.forEach(message => this.messages.push(message))))
+        this.$http(options).then(res => res.json().then(
+            data =>
+                data.forEach(component => this.components.push(component))
+        ))
     }
-})
-;
+});
 
 var app = new Vue({
     el: '#app',
-    template: '<messages-list :messages="messages"/>',
+    template: '<component-list :components="components"/>',
     data: {
-        messages: []
+        components: []
     }
 });

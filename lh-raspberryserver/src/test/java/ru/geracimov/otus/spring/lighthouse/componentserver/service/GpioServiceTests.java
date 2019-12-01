@@ -1,9 +1,6 @@
 package ru.geracimov.otus.spring.lighthouse.componentserver.service;
 
-import com.pi4j.io.gpio.GpioController;
-import com.pi4j.io.gpio.GpioPin;
-import com.pi4j.io.gpio.Pin;
-import com.pi4j.io.gpio.RaspiPin;
+import com.pi4j.io.gpio.*;
 import com.pi4j.platform.PlatformManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import ru.geracimov.otus.spring.lighthouse.componentserver.repository.ComponentRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,6 +17,11 @@ import static ru.geracimov.otus.spring.lighthouse.componentserver.helper.StringH
 
 @SpringBootTest(classes = {ServiceConfigurationTests.class})
 class GpioServiceTests {
+
+//    GpioProvider gpioProvider = new SimulatedGpioProvider();
+
+    @MockBean
+    ComponentRepository componentRepository;
 
     @MockBean
     PlatformManager platformManager;
@@ -29,6 +32,7 @@ class GpioServiceTests {
     @BeforeEach
     void setUp() {
         System.setProperty("pi4j.platform", "simulated");
+
     }
 
     @AfterEach

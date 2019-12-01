@@ -8,6 +8,11 @@ public class RegisterComponentException extends RuntimeException {
         this.clazz = clazz;
     }
 
+    public RegisterComponentException(Class<?> clazz, Integer address) {
+        super("Address " + address + " already registered");
+        this.clazz = clazz;
+    }
+
     public Class<?> getInstanceClass() {
         return clazz;
     }

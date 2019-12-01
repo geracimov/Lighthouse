@@ -21,6 +21,8 @@
         <module>lh-raspberryserver</module>
         <module>lh-discoveryserver</module>
         <module>lh-managementserver</module>
+        <module>lh-domaincomponents</module>
+        <module>lh-gatewayserver</module>
     </modules>
 
     <properties>

@@ -19,6 +19,7 @@
         <java.version>8</java.version>
         <pi4j.version>1.2</pi4j.version>
         <lombok.version>1.18.10</lombok.version>
+        <components.version>1.0.0</components.version>
     </properties>
 
     <dependencies>
@@ -43,15 +44,23 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>
+        <dependency>
+            <groupId>ru.geracimov.otus.spring.lighthouse</groupId>
+            <artifactId>lh-domaincomponents</artifactId>
+            <version>${components.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
         <!-- - - - - - - - third-party - - - - - - - -->
         <dependency>
             <groupId>com.pi4j</groupId>
             <artifactId>pi4j-core</artifactId>
-            <version>${pi4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.pi4j</groupId>
-            <artifactId>pi4j-device</artifactId>
             <version>${pi4j.version}</version>
         </dependency>
         <dependency>
@@ -61,5 +70,4 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-
 </project>

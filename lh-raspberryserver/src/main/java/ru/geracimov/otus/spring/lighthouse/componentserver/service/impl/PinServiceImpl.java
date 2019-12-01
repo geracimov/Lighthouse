@@ -12,6 +12,7 @@ import ru.geracimov.otus.spring.lighthouse.componentserver.exception.IncorrectPi
 import ru.geracimov.otus.spring.lighthouse.componentserver.service.PinService;
 
 import javax.annotation.PreDestroy;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -28,7 +29,8 @@ public class PinServiceImpl implements PinService {
 
     @Override
     public Collection<GpioPin> reservedPins() {
-        return gpioController.getProvisionedPins();
+        final Collection<GpioPin> provisionedPins = gpioController.getProvisionedPins();
+        return new ArrayList<>(provisionedPins);
     }
 
     @Override
@@ -59,7 +61,7 @@ public class PinServiceImpl implements PinService {
     }
 
     @Override
-    public GpioPin reservePin(int address, String pinName, PinMode pinMode) {
+    public GpioPin reservePin(int address, String pinName, PinMode pinMode, PinState pinState) {
         Pin pin = pinProvider.getPinByAddress(address);
         if (pin == null) throw new IncorrectPinException(address);
         log.debug("Pin (" + pin + ") register...");
@@ -75,22 +77,25 @@ public class PinServiceImpl implements PinService {
                                              .contains(pinMode);
         if (!isModeSupported) throw new UnsupportedPinModeException(pin, pinMode);
 
-        final GpioPin gpioPin = gpioController.provisionPin(gpioProvider, pin, pinName, pinMode, PinState.LOW);
+        final GpioPin gpioPin = gpioController.provisionPin(gpioProvider, pin, pinName, pinMode, pinState);
         gpioPin.setMode(pinMode);
         log.debug("Pin (" + pin + ") registered as (" + gpioPin + ")");
-        gpioPin.addListener((GpioPinListenerDigital) event -> System.out.println(event.getState() + "--------------------------" + event.getEdge()));
+        gpioPin.addListener((GpioPinListenerDigital) event -> System.out
+                .println(event.getState() + "--------------------------" + event.getEdge()));
         return gpioPin;
     }
 
     @Override
     public void freePin(Pin pin) {
-        log.debug("Pin (" + pin + ") unexported...");
-        gpioController.unexport(pin);
+        log.debug("Pin (" + pin + ") unprovisioned...");
+        final GpioPin provisionedPin = gpioController.getProvisionedPin(pin);
+        gpioController.unexport(provisionedPin);
+        gpioController.unprovisionPin(provisionedPin);
     }
 
     @Override
     public void freePin(int address) {
-        Pin pin = pinProvider.getPinByAddress(address);
+        final Pin pin = pin(address);
         freePin(pin);
     }
 

@@ -1,9 +1,9 @@
 package ru.geracimov.otus.spring.lighthouse.componentserver.service.impl;
 
-import com.pi4j.component.Component;
-import com.pi4j.component.light.impl.GpioLEDComponent;
-import com.pi4j.component.relay.impl.GpioRelayComponent;
-import com.pi4j.component.temperature.impl.Dht11Component;
+import ru.geracimov.otus.spring.lighthouse.componentserver.domain.Component;
+import ru.geracimov.otus.spring.lighthouse.componentserver.domain.component.led.LEDComponent;
+import ru.geracimov.otus.spring.lighthouse.componentserver.domain.component.relay.RelayComponent;
+import ru.geracimov.otus.spring.lighthouse.componentserver.domain.component.termometer.Dht11Component;
 import lombok.val;
 import org.springframework.stereotype.Service;
 import ru.geracimov.otus.spring.lighthouse.componentserver.exception.InvalidComponentTypeException;
@@ -19,8 +19,8 @@ public class ComponentTypeMapperImpl implements ComponentTypeMapper {
 
     static {
         components = new HashMap<>();
-        components.put("relay", GpioRelayComponent.class);
-        components.put("led", GpioLEDComponent.class);
+        components.put("relay", RelayComponent.class);
+        components.put("led", LEDComponent.class);
         components.put("dht", Dht11Component.class);
     }
 

@@ -1,6 +1,7 @@
 package ru.geracimov.otus.spring.lighthouse.componentserver.service;
 
-import com.pi4j.component.Component;
+
+import ru.geracimov.otus.spring.lighthouse.componentserver.domain.Component;
 
 public interface ComponentTypeMapper {
 

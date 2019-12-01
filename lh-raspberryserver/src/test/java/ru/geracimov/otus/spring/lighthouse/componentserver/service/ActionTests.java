@@ -1,23 +1,28 @@
 package ru.geracimov.otus.spring.lighthouse.componentserver.service;
 
-import com.pi4j.component.relay.Relay;
-import com.pi4j.component.relay.RelayState;
-import com.pi4j.component.relay.impl.GpioRelayComponent;
 import com.pi4j.io.gpio.GpioPin;
-import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinMode;
+import com.pi4j.io.gpio.PinState;
+import com.pi4j.io.gpio.impl.GpioPinImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import ru.geracimov.otus.spring.lighthouse.componentserver.domain.component.relay.RelayComponent;
+import ru.geracimov.otus.spring.lighthouse.componentserver.repository.ComponentRepository;
 import ru.geracimov.otus.spring.lighthouse.componentserver.service.impl.PinServiceImpl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ru.geracimov.otus.spring.lighthouse.componentserver.helper.JavaHelper.currentMethodName;
 import static ru.geracimov.otus.spring.lighthouse.componentserver.helper.StringHelper.getHeader;
 
 @SpringBootTest(classes = {ServiceConfigurationTests.class, PinServiceImpl.class})
 class ActionTests {
+
+    @MockBean
+    ComponentRepository componentRepository;
 
     @Autowired
     private PinService pinService;
@@ -32,15 +37,14 @@ class ActionTests {
         System.out.println(getHeader(currentMethodName()));
         int pinNum = 25;
         String pinName = "relay";
-        GpioPin pin = pinService.reservePin(pinNum, pinName, PinMode.DIGITAL_OUTPUT);
-        GpioPinDigitalOutput gpioPin = (GpioPinDigitalOutput) pin;
-        Relay relay = new GpioRelayComponent(gpioPin);
+        GpioPin pin = pinService.reservePin(pinNum, pinName, PinMode.DIGITAL_OUTPUT, PinState.LOW);
+        GpioPinImpl gpioPin = (GpioPinImpl) pin;
+        RelayComponent relay = new RelayComponent(gpioPin);
 
-        assertEquals(RelayState.OPEN, relay.getState());
-        relay.toggle();
-        assertEquals(RelayState.CLOSED, relay.getState());
-        relay.toggle();
-        assertEquals(RelayState.OPEN, relay.getState());
+        relay.close();
+        assertFalse(relay.isOpen());
+        relay.open();
+        assertTrue(relay.isOpen());
     }
 
 }

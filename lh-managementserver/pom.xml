@@ -18,6 +18,7 @@
     <properties>
         <lombok.version>1.18.10</lombok.version>
         <pi4j.version>1.2</pi4j.version>
+        <components.version>1.0.0</components.version>
     </properties>
 
     <dependencies>
@@ -37,6 +38,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ru.geracimov.otus.spring.lighthouse</groupId>
+            <artifactId>lh-domaincomponents</artifactId>
+            <version>${components.version}</version>
         </dependency>
         <!-- - - - - - - - third-party - - - - - - - -->
         <dependency>
